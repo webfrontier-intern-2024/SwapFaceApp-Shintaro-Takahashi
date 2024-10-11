@@ -8,28 +8,31 @@ const App: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleUpload = async (file: File) => {
+    setLoading(true);
+    setError(null);
+
     const formData = new FormData();
     formData.append('image', file);
-  
+
     try {
       const response = await fetch('/api/images/upload', {
         method: 'POST',
         body: formData,
       });
-  
+
       if (!response.ok) {
         throw new Error('Failed to upload image');
       }
-  
+
       const result = await response.json();
       console.log('Upload success:', result);
     } catch (err) {
+      setError('画像のアップロードに失敗しました。もう一度お試しください。');
       console.error('Upload error:', err);
+    } finally {
+      setLoading(false);
     }
   };
-  
-  
-  
 
   return (
     <div className="p-4">

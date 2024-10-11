@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.drop-area {
+    position: relative;
+    z-index: 40; /* ドロップエリアを前面に出す */
+  }
+  
+  
